@@ -7,12 +7,16 @@ using UnityEngine.InputSystem;
 public class NewBehaviourScript : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 1f;
-    
+    [SerializeField] private float dashSpeed = 4f;
+    [SerializeField] private float dashCoolDown = .5f;
+    [SerializeField] private TrailRenderer trailRenderer;
+
     private PlayerControls playerControls;
     private Vector2 movement;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private bool isDashing = false;
 
 
 
@@ -24,6 +28,11 @@ public class NewBehaviourScript : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    public void Start()
+    {
+        playerControls.Combat.Dash.performed += _ => Dash();
+    }
+
     private void OnEnable()
     {
         playerControls.Enable();
@@ -31,7 +40,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     void Update()
     {
-        PlayerInput();    
+        PlayerInput();
     }
 
     private void FixedUpdate()
@@ -42,7 +51,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void Move()
     {
-        rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime)); 
+        rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
     }
 
     private void PlayerInput()
@@ -57,7 +66,7 @@ public class NewBehaviourScript : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         Vector3 playerScreenPoint = Camera.main.WorldToScreenPoint(transform.position);
 
-        if(mousePos.x < playerScreenPoint.x)
+        if (mousePos.x < playerScreenPoint.x)
         {
             spriteRenderer.flipX = true;
         }
@@ -65,5 +74,26 @@ public class NewBehaviourScript : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
+    }
+
+    private void Dash()
+    {
+        if (!isDashing)
+        {
+            isDashing = true;
+            moveSpeed *= dashSpeed;
+            trailRenderer.emitting = true;
+            StartCoroutine(EndDashRoutine());
+        }
+    }
+
+    private IEnumerator EndDashRoutine()
+    {
+        float dashTime = .2f;
+        yield return new WaitForSeconds(dashTime);
+        moveSpeed /= dashSpeed;
+        trailRenderer.emitting = false;
+        yield return new WaitForSeconds(dashCoolDown);
+        isDashing = false;
     }
 }
