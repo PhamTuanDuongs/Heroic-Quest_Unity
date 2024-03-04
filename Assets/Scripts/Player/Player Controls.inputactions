@@ -78,10 +78,10 @@
             "id": "5ccc7d5f-21fd-4ccc-8ab5-ae3b3387272f",
             "actions": [
                 {
-                    "name": "New action",
-                    "type": "PassThrough",
+                    "name": "Attack",
+                    "type": "Button",
                     "id": "e4bdda22-6091-471c-83fc-f06b49ad36b9",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -100,11 +100,11 @@
                 {
                     "name": "",
                     "id": "c0cbc89c-c49e-426c-b574-1438ea611dad",
-                    "path": "",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

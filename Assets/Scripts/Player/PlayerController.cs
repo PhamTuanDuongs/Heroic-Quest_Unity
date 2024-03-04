@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class NewBehaviourScript : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float dashSpeed = 4f;
     [SerializeField] private float dashCoolDown = .5f;
     [SerializeField] private TrailRenderer trailRenderer;
+
+    private bool facingLeft = false;
+    public bool FacingLeft { get { return facingLeft; } set { facingLeft = value; } }
+    public static PlayerController Instance;
 
     private PlayerControls playerControls;
     private Vector2 movement;
@@ -22,6 +26,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     void Awake()
     {
+        Instance = this;
         playerControls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -69,10 +74,12 @@ public class NewBehaviourScript : MonoBehaviour
         if (mousePos.x < playerScreenPoint.x)
         {
             spriteRenderer.flipX = true;
+            facingLeft = true;
         }
         else
         {
             spriteRenderer.flipX = false;
+            facingLeft = false;
         }
     }
 
