@@ -30,4 +30,8 @@ public class EnemyPathFinding : MonoBehaviour
         moveDir = roamPosition;
     }
 
+    internal void StopMoving()
+    {
+        moveDir = new Vector2(0, 0);
+    }
 }

@@ -10,6 +10,9 @@ public class Flash : MonoBehaviour
     private Material materialDefault;
     private SpriteRenderer sr;
     private EnemyHealth enemyHealth;
+
+    public float FlashDuration { get => flashDuration; }
+
     private void Awake()
     {
         enemyHealth = GetComponent<EnemyHealth>();
@@ -20,8 +23,8 @@ public class Flash : MonoBehaviour
     public IEnumerator FlashRoutine()
     {
         sr.material = whiteFlashMaterial;
-        yield return new WaitForSeconds(flashDuration);
+        yield return new WaitForSeconds(FlashDuration);
         sr.material = materialDefault;
-        enemyHealth.DetectDeath();
+
     }
 }

@@ -73,9 +73,9 @@ public class Sword : MonoBehaviour
 
     private void MouseFollowWithOffSet()
     {
-        Vector3 mousePos = Input.mousePosition;
-        Vector3 playScreenPoint = Camera.main.WorldToScreenPoint(playerController.transform.position);
-        float angle = Mathf.Atan2(mousePos.x, mousePos.y) * Mathf.Rad2Deg;
+        Vector3 mousePos = Input.mousePosition; 
+        Vector3 playScreenPoint = Camera.main.WorldToScreenPoint(playerController.transform.position); // convert coordinate of player to calculate by game screen
+        float angle = Mathf.Atan2(mousePos.x, mousePos.y) * Mathf.Rad2Deg; // calculate angle of mouse 
         if (mousePos.x < playScreenPoint.x)
         {
             activeWeapon.transform.rotation = Quaternion.Euler(0, -180, angle);

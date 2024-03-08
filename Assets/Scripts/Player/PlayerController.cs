@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private KnockBack knockBack;
     private bool isDashing = false;
 
 
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        knockBack = GetComponent<KnockBack>();
     }
 
     public void Start()
@@ -56,6 +58,8 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        if (knockBack.gettingKnockBack)
+            return;
         rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
     }
 

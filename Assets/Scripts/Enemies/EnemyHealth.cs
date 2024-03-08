@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,7 +31,14 @@ public class EnemyHealth : MonoBehaviour
         currentHealth -= damage;
         knockBack.GettingKnocked(PlayerController.Instance.transform, 15f);
         StartCoroutine(flash.FlashRoutine());
+        StartCoroutine(CheckDetectRoutine());
 
+    }
+
+    private IEnumerator CheckDetectRoutine()
+    {
+        yield return new WaitForSeconds(flash.FlashDuration);
+        DetectDeath();
     }
 
     public void DetectDeath()
