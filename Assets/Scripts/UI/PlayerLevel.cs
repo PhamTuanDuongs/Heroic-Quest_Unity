@@ -22,10 +22,10 @@ public class PlayerLevel : MonoBehaviour
         expUI.UpdateExp((int)currentExp, (int)currentMaxExp);
     }
 
-    public void OnGetExp(object sender, int amount)
+    public void OnGetExp(object sender, int  amount)
     {
         currentExp += amount;
-        if (currentExp >= currentMaxExp)
+        if(currentExp >= currentMaxExp)
         {
             currentLevel++;
             currentExp -= currentMaxExp;

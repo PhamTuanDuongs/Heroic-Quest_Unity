@@ -14,7 +14,10 @@ public class PlayerHealth : MonoBehaviour
     private KnockBack knockBack;
     private Flash flash;
     private Rigidbody2D rb;
+
+    //Display hp
     private HealthUI healthUI;
+
     private void Awake()
     {
         knockBack = GetComponent<KnockBack>();
@@ -51,17 +54,17 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(RecoveryAfterAttack());
     }
 
-    private IEnumerator RecoveryAfterAttack()
-    {
-        yield return new WaitForSeconds(damageRecoveryTime);
-        canTakeDamage = true;
-    }
     public void Recovery(int value)
     {
         currentHealth += value;
         healthUI.UpdateHealth(currentHealth, maxHealth);
     }
 
+    private IEnumerator RecoveryAfterAttack()
+    {
+        yield return new WaitForSeconds(damageRecoveryTime);
+        canTakeDamage = true;
+    }
 
     public void DetectDeath()
     {

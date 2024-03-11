@@ -7,17 +7,20 @@ public class EnemyHealth : MonoBehaviour
 {
     public EventHandler<int> OnEnemyDead;
     [SerializeField] private int expDrop;
+
     [SerializeField] private int health = 3;
     [SerializeField] private int currentHealth;
     private KnockBack knockBack;
     private Flash flash;
+
+    //Display hp
     private HealthUI healthUI;
 
     private void Awake()
     {
         knockBack = GetComponent<KnockBack>();
         flash = GetComponent<Flash>();
-        healthUI = GetComponent<HealthUI>();
+        healthUI = GetComponent<HealthUI>();    
     }
     void Start()
     {
@@ -49,7 +52,6 @@ public class EnemyHealth : MonoBehaviour
     public void DetectDeath()
     {
         if (currentHealth <= 0)
-
         {
             OnEnemyDead.Invoke(this, expDrop);
             Destroy(gameObject);

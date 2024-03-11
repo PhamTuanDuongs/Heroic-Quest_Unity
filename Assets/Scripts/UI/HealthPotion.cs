@@ -12,6 +12,6 @@ public class HealthPotion : MonoBehaviour
         {
             collision.GetComponent<PlayerHealth>().Recovery(healthAmount);
             Destroy(gameObject);
-        }
+        }    
     }
 }
