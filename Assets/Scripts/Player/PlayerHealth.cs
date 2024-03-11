@@ -14,15 +14,18 @@ public class PlayerHealth : MonoBehaviour
     private KnockBack knockBack;
     private Flash flash;
     private Rigidbody2D rb;
+    private HealthUI healthUI;
     private void Awake()
     {
         knockBack = GetComponent<KnockBack>();
         flash = GetComponent<Flash>();
         rb = GetComponent<Rigidbody2D>();
+        healthUI = GetComponent<HealthUI>();
     }
     void Start()
     {
         currentHealth = maxHealth;
+        healthUI.UpdateHealth(currentHealth, maxHealth);
     }
 
     // Update is called once per frame
@@ -40,7 +43,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage, Transform source)
     {
         if (!canTakeDamage) { return; }
-
+        healthUI.UpdateHealth(currentHealth, maxHealth);
         knockBack.GettingKnocked(source, knockBackThrustAmount);
         StartCoroutine(flash.FlashRoutine());
         canTakeDamage = false;
@@ -53,6 +56,12 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(damageRecoveryTime);
         canTakeDamage = true;
     }
+    public void Recovery(int value)
+    {
+        currentHealth += value;
+        healthUI.UpdateHealth(currentHealth, maxHealth);
+    }
+
 
     public void DetectDeath()
     {
