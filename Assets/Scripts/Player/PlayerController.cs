@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDashing)
         {
+            Debug.Log("ns snxs");
             isDashing = true;
             moveSpeed *= dashSpeed;
             trailRenderer.emitting = true;
