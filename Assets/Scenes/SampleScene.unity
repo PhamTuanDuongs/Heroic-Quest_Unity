@@ -18791,15 +18791,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 574029807424695631, guid: 79c4c795a4b8ab84e972e8b501cb01ee, type: 3}
       propertyPath: m_Name
-      value: HealthBarrel
+      value: HealthPearl (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8320048273610406113, guid: 79c4c795a4b8ab84e972e8b501cb01ee, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.18358561
+      objectReference: {fileID: 0}
+    - target: {fileID: 8320048273610406113, guid: 79c4c795a4b8ab84e972e8b501cb01ee, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.23840961
       objectReference: {fileID: 0}
     - target: {fileID: 8320048273610406113, guid: 79c4c795a4b8ab84e972e8b501cb01ee, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.8346769
+      value: 7.16
       objectReference: {fileID: 0}
     - target: {fileID: 8320048273610406113, guid: 79c4c795a4b8ab84e972e8b501cb01ee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.38234615
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 8320048273610406113, guid: 79c4c795a4b8ab84e972e8b501cb01ee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18833,6 +18841,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8900426716563587675, guid: 79c4c795a4b8ab84e972e8b501cb01ee, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 694b63d70383d1f4397ce09f157ade81, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
