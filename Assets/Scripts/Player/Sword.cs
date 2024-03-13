@@ -7,11 +7,13 @@ public class Sword : MonoBehaviour
     [SerializeField] private GameObject slashAnimPrefab;
     [SerializeField] private Transform slashAnimationPoint;
     [SerializeField] private Transform weaponCollider;
+    [SerializeField] private float attackCoolDown = 0.5f;
 
     private PlayerControls playControls;
     private Animator animator;
     private PlayerController playerController;
     private ActiveWeapon activeWeapon;
+    private bool canAttack = true;
 
     //slash anim instantinate when attack
     private GameObject slashAnim;
@@ -41,10 +43,25 @@ public class Sword : MonoBehaviour
 
     private void Attack()
     {
+        //animator.SetTrigger("Attack");
+        //slashAnim = Instantiate(slashAnimPrefab, slashAnimationPoint.position, Quaternion.identity);
+        //weaponCollider.gameObject.SetActive(true);
+        if (canAttack)
+        {
+            canAttack = false;
+            StartCoroutine(AttackRoutine());
+
+        }
+    }
+
+    private IEnumerator AttackRoutine()
+    {
+        Debug.Log("attack");
         animator.SetTrigger("Attack");
         slashAnim = Instantiate(slashAnimPrefab, slashAnimationPoint.position, Quaternion.identity);
         weaponCollider.gameObject.SetActive(true);
-
+        yield return new WaitForSeconds(attackCoolDown);
+        canAttack = true;
     }
     public void DoneAttackingAnimEvent()
     {
@@ -73,7 +90,7 @@ public class Sword : MonoBehaviour
 
     private void MouseFollowWithOffSet()
     {
-        Vector3 mousePos = Input.mousePosition; 
+        Vector3 mousePos = Input.mousePosition;
         Vector3 playScreenPoint = Camera.main.WorldToScreenPoint(playerController.transform.position); // convert coordinate of player to calculate by game screen
         float angle = Mathf.Atan2(mousePos.x, mousePos.y) * Mathf.Rad2Deg; // calculate angle of mouse 
         if (mousePos.x < playScreenPoint.x)

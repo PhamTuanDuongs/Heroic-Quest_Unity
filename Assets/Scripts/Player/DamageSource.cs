@@ -8,6 +8,10 @@ public class DamageSource : MonoBehaviour
     [SerializeField] private int damage = 1;
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.GetComponent<Projectiles>())
+        {
+            collision.gameObject.transform.right = collision.gameObject.transform.right * -1;
+        }
         if (collision.gameObject.GetComponent<EnemyAI>())
         {
             EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();

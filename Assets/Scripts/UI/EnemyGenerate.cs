@@ -14,37 +14,69 @@ public class EnemyGenerate : MonoBehaviour
     [SerializeField] private Vector2 spawnArea;
     [SerializeField] private float spawnInterval = 2f;
     [SerializeField] private PlayerLevel playerLevel;
+    [SerializeField] private WaveUI waveUI;
+    [SerializeField] private GameObject[] enemyTypes;
+    [SerializeField] private int initCount = 2;
+    [SerializeField] private int incrementalNum = 1;
+
     private int currentWave = 0;
+    private bool canSpawn = true;
 
     private void Start()
     {
         playerLevel = FindFirstObjectByType<PlayerLevel>();
         StartCoroutine(SpawnWave());
     }
+
+    private void Update()
+    {
+        GameObject[] enemiesInWave = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemiesInWave.Length <= 0 && canSpawn)
+        {
+            StartCoroutine(waveUI.WaveComplete());
+            StartCoroutine(SpawnWave());
+        }
+    }
     IEnumerator SpawnWave()
     {
-        Debug.Log("c: " + currentWave);
-        if(currentWave >= wavesToSpawn.Length)
+        canSpawn = false;
+        if (currentWave != 0)
         {
-            Debug.Log("??????");
-            StopAllCoroutines();
-            yield return null;
+            yield return new WaitForSeconds(1f);
+        }
+        Debug.Log("c: " + currentWave);
+        //if (currentWave >= wavesToSpawn.Length)
+        //{
+        //    StopAllCoroutines();
+        //    yield return null;
+        //}
+
+        //spawn enemy
+
+        int numberEnemies = initCount + (currentWave * incrementalNum);
+        Debug.Log("total Enemies: " + (currentWave * incrementalNum));
+        for (int i = 0; i < enemyTypes.Length; i++)
+        {
+            StartCoroutine(SpawnRandomObject(enemyTypes[i], numberEnemies));
+
         }
 
-        for(int i = 0; i < wavesToSpawn[currentWave].enemiesToSpawn.Length; i++)
-        {
-            StartCoroutine(SpawnRandomObject(wavesToSpawn[currentWave].enemiesToSpawn[i], wavesToSpawn[currentWave].totalEnemiesToSpawn[i]));
-        }
+        //for (int i = 0; i < wavesToSpawn[currentWave].enemiesToSpawn.Length; i++)
+        //{
+        //    StartCoroutine(SpawnRandomObject(wavesToSpawn[currentWave].enemiesToSpawn[i], wavesToSpawn[currentWave].totalEnemiesToSpawn[i]));
+        //}
         currentWave++;
-        yield return new WaitForSeconds(spawnInterval);
-        StartCoroutine(SpawnWave());
+        canSpawn = true;
+        //yield return new WaitForSeconds(spawnInterval);
+        //StartCoroutine(SpawnWave());
     }
 
     IEnumerator SpawnRandomObject(GameObject objectToSpawn, int total)
     {
         int count = 0;
-        while(count < total)
+        while (count < total)
         {
+
             count++;
             float randomDistance = Random.Range(0f, spawnArea.magnitude);
             float randomAngle = Random.Range(0f, 360f);
@@ -55,7 +87,7 @@ public class EnemyGenerate : MonoBehaviour
 
             yield return new WaitForSeconds(.5f);
         }
-        
+
     }
 
     private void OnDrawGizmos()

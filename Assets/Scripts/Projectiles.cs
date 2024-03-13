@@ -48,7 +48,7 @@ public class Projectiles : MonoBehaviour
             else if (!other.isTrigger && indestructible)
             {
                 Destroy(gameObject);
-            }
+            } 
 
         }
     }
