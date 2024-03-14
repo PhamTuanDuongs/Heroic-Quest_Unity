@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,11 +46,13 @@ public class Sword : MonoBehaviour
         //animator.SetTrigger("Attack");
         //slashAnim = Instantiate(slashAnimPrefab, slashAnimationPoint.position, Quaternion.identity);
         //weaponCollider.gameObject.SetActive(true);
-        if (canAttack)
+        if (gameObject.activeInHierarchy) // Kiểm tra xem đối tượng Sword có tồn tại không
         {
-            canAttack = false;
-            StartCoroutine(AttackRoutine());
-
+            if (canAttack)
+            {
+                canAttack = false;
+                StartCoroutine(AttackRoutine());
+            }
         }
     }
 

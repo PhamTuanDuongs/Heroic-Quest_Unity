@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PlayerHealth : MonoBehaviour
@@ -52,6 +53,7 @@ public class PlayerHealth : MonoBehaviour
         canTakeDamage = false;
         currentHealth -= damage;
         StartCoroutine(RecoveryAfterAttack());
+        DetectDeath();
     }
 
     public void Recovery(int value)
@@ -70,7 +72,8 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            SceneManager.LoadScene(1);
+
         }
     }
 }
