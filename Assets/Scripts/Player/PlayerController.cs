@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashSpeed = 4f;
     [SerializeField] private float dashCoolDown = .5f;
     [SerializeField] private TrailRenderer trailRenderer;
+    [SerializeField] private AudioSource footSound;
 
     private bool facingLeft = false;
     public bool FacingLeft { get { return facingLeft; } set { facingLeft = value; } }
@@ -22,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private KnockBack knockBack;
     private bool isDashing = false;
-
+    private bool isMoving;
 
 
     void Awake()
@@ -68,6 +69,15 @@ public class PlayerController : MonoBehaviour
         movement = playerControls.Movement.Move.ReadValue<Vector2>();
         animator.SetFloat("moveX", movement.x);
         animator.SetFloat("moveY", movement.y);
+        if (isMoving && movement == Vector2.zero)
+        {
+            footSound.Stop();
+        }
+        if (!isMoving && movement != Vector2.zero)
+        {
+            footSound.Play();
+        }
+        isMoving = movement != Vector2.zero;
     }
 
     private void AdjustPlayerFacingDirection()
@@ -89,18 +99,14 @@ public class PlayerController : MonoBehaviour
 
     private void Dash()
     {
-        if (!isDashing)
-        {
-            Debug.Log("ns snxs");
-            isDashing = true;
-            moveSpeed *= dashSpeed;
-            trailRenderer.emitting = true;
-            StartCoroutine(EndDashRoutine());
-        }
+        if (!isDashing) StartCoroutine(IEDash());
     }
 
-    private IEnumerator EndDashRoutine()
+    private IEnumerator IEDash()
     {
+        isDashing = true;
+        moveSpeed *= dashSpeed;
+        trailRenderer.emitting = true;
         float dashTime = .2f;
         yield return new WaitForSeconds(dashTime);
         moveSpeed /= dashSpeed;

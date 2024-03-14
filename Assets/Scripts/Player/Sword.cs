@@ -8,6 +8,7 @@ public class Sword : MonoBehaviour
     [SerializeField] private Transform slashAnimationPoint;
     [SerializeField] private Transform weaponCollider;
     [SerializeField] private float attackCoolDown = 0.5f;
+    [SerializeField] private AudioSource slashSound;
 
     private PlayerControls playControls;
     private Animator animator;
@@ -50,6 +51,7 @@ public class Sword : MonoBehaviour
         {
             if (canAttack)
             {
+                slashSound.Play();
                 canAttack = false;
                 StartCoroutine(AttackRoutine());
             }
