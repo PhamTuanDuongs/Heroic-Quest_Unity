@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashCoolDown = .5f;
     [SerializeField] private TrailRenderer trailRenderer;
     [SerializeField] private AudioSource footSound;
+    [SerializeField] private AudioSource dashSound;
 
     private bool facingLeft = false;
     public bool FacingLeft { get { return facingLeft; } set { facingLeft = value; } }
@@ -104,6 +105,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator IEDash()
     {
+        dashSound.Play();
         isDashing = true;
         moveSpeed *= dashSpeed;
         trailRenderer.emitting = true;

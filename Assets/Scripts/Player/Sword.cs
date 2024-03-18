@@ -47,20 +47,26 @@ public class Sword : MonoBehaviour
         //animator.SetTrigger("Attack");
         //slashAnim = Instantiate(slashAnimPrefab, slashAnimationPoint.position, Quaternion.identity);
         //weaponCollider.gameObject.SetActive(true);
-        if (gameObject.activeInHierarchy) // Kiểm tra xem đối tượng Sword có tồn tại không
+        //if (gameObject.activeInHierarchy) // Kiểm tra xem đối tượng Sword có tồn tại không
+        //{
+        //    if (canAttack)
+        //    {
+        //        slashSound.Play();
+        //        canAttack = false;
+        //        StartCoroutine(AttackRoutine());
+        //    }
+        //}
+
+        if (canAttack)
         {
-            if (canAttack)
-            {
-                slashSound.Play();
-                canAttack = false;
-                StartCoroutine(AttackRoutine());
-            }
+            slashSound.Play();
+            canAttack = false;
+            StartCoroutine(AttackRoutine());
         }
     }
 
     private IEnumerator AttackRoutine()
     {
-        Debug.Log("attack");
         animator.SetTrigger("Attack");
         slashAnim = Instantiate(slashAnimPrefab, slashAnimationPoint.position, Quaternion.identity);
         weaponCollider.gameObject.SetActive(true);

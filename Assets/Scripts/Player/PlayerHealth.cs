@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] int maxHealth = 3;
     [SerializeField] private float knockBackThrustAmount = 10f;
     [SerializeField] private float damageRecoveryTime = 1f;
+    [SerializeField] private AudioSource takeDamageSound;
 
     private bool canTakeDamage = true;
     private int currentHealth;
@@ -46,12 +47,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage, Transform source)
     {
+        takeDamageSound.Play();
         if (!canTakeDamage) { return; }
+        currentHealth -= damage;
         healthUI.UpdateHealth(currentHealth, maxHealth);
         knockBack.GettingKnocked(source, knockBackThrustAmount);
         StartCoroutine(flash.FlashRoutine());
         canTakeDamage = false;
-        currentHealth -= damage;
         StartCoroutine(RecoveryAfterAttack());
         DetectDeath();
     }
