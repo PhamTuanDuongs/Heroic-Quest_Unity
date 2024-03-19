@@ -14,6 +14,7 @@ public class EnemyHealth : MonoBehaviour
     private KnockBack knockBack;
     private Flash flash;
     private PickupSpawner pickupSpawner;
+    private PlayerController playerController;
 
     //Display hp
     private HealthUI healthUI;
@@ -24,6 +25,7 @@ public class EnemyHealth : MonoBehaviour
         flash = GetComponent<Flash>();
         healthUI = GetComponent<HealthUI>();
         pickupSpawner = GetComponent<PickupSpawner>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
     void Start()
     {
@@ -40,7 +42,7 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= damage;
         healthUI.UpdateHealth(currentHealth, health);
-        knockBack.GettingKnocked(PlayerController.Instance.transform, 15f);
+        knockBack.GettingKnocked(playerController.transform, 15f);
         StartCoroutine(flash.FlashRoutine());
         StartCoroutine(CheckDetectRoutine());
 

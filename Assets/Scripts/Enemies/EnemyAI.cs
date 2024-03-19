@@ -11,6 +11,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private bool stopMovingWhileAttacking = false;
 
     private bool canAttack = true;
+    private PlayerController playerController;
     private enum State
     {
         Roaming,
@@ -25,6 +26,7 @@ public class EnemyAI : MonoBehaviour
     private void Awake()
     {
         pathFinding = GetComponent<EnemyPathFinding>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         state = State.Roaming;
     }
 
@@ -56,7 +58,7 @@ public class EnemyAI : MonoBehaviour
     {
         timeRoaming += Time.deltaTime;
         pathFinding.MoveTo(roamPosition);
-        if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < attackRange)
+        if (Vector2.Distance(transform.position, playerController.transform.position) < attackRange)
         {
             state = State.Attacking;
         }
@@ -69,7 +71,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Attacking()
     {
-        if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) > attackRange)
+        if (Vector2.Distance(transform.position, playerController.transform.position) > attackRange)
         {
             state = State.Roaming;
         }

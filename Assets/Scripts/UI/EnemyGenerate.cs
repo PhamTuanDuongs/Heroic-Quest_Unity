@@ -39,20 +39,16 @@ public class EnemyGenerate : MonoBehaviour
             StartCoroutine(SpawnWave());
         }
     }
+
+
     IEnumerator SpawnWave()
     {
         canSpawn = false;
-        if (currentWave != 0)
-        {
-            yield return new WaitForSeconds(1f);
-        }
-        //if (currentWave >= wavesToSpawn.Length)
-        //{
-        //    StopAllCoroutines();
-        //    yield return null;
-        //}
 
-        //spawn enemy
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(waveUI.StartWave());
+        yield return new WaitForSeconds(0.5f);
+
 
         int numberEnemies = initCount + (currentWave * incrementalNum);
         for (int i = 0; i < enemyTypes.Length; i++)
@@ -61,14 +57,10 @@ public class EnemyGenerate : MonoBehaviour
 
         }
 
-        //for (int i = 0; i < wavesToSpawn[currentWave].enemiesToSpawn.Length; i++)
-        //{
-        //    StartCoroutine(SpawnRandomObject(wavesToSpawn[currentWave].enemiesToSpawn[i], wavesToSpawn[currentWave].totalEnemiesToSpawn[i]));
-        //}
+
         currentWave++;
         canSpawn = true;
-        //yield return new WaitForSeconds(spawnInterval);
-        //StartCoroutine(SpawnWave());
+
     }
 
     IEnumerator SpawnRandomObject(GameObject objectToSpawn, int total)
@@ -96,8 +88,16 @@ public class EnemyGenerate : MonoBehaviour
         float randomDistance = Random.Range(0f, spawnArea.magnitude);
         float randomAngle = Random.Range(0f, 360f);
         spawnPosition = (Vector2)transform.position + new Vector2(Mathf.Cos(randomAngle) * randomDistance, Mathf.Sin(randomAngle) * randomDistance);
-        if (Physics2D.OverlapCircle(spawnPosition, 0.5f, boundary))
-            spawnPosition = transform.position;
+
+        Collider2D col = Physics2D.OverlapCircle(spawnPosition, 3f, LayerMask.GetMask("Foreground"));
+        if (col != null)
+        {
+            if (col.bounds.Contains(spawnPosition))
+            {
+                spawnPosition = transform.position;
+
+            }
+        }
 
         return spawnPosition;
     }
@@ -106,6 +106,5 @@ public class EnemyGenerate : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, spawnArea.magnitude);
-        Gizmos.DrawSphere(transform.position, 0.5f);
     }
 }

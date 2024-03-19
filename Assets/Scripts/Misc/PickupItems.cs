@@ -11,16 +11,17 @@ public class PickupItems : MonoBehaviour
     GameplayUI gameplayUI;
     private Vector3 moveDir;
     private Rigidbody2D rb;
-
+    private PlayerController playerController;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         gameplayUI = GameObject.Find("GameplayUI").GetComponent<GameplayUI>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     private void Update()
     {
-        Vector3 playerPos = PlayerController.Instance.transform.position;
+        Vector3 playerPos = playerController.transform.position;
 
         if (Vector3.Distance(transform.position, playerPos) < pickUpDistance)
         {

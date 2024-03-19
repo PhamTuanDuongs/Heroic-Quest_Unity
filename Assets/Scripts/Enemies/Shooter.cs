@@ -13,7 +13,12 @@ public class Shooter : MonoBehaviour, IEnemy
     [SerializeField] private float resetTime = 1f;
 
     private bool isShooting = false;
+    private PlayerController playerController;
 
+    private void Awake()
+    {
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+    }
     public void Attack()
     {
         //Vector2 targetDirection = PlayerController.Instance.transform.position - transform.position;
@@ -30,7 +35,7 @@ public class Shooter : MonoBehaviour, IEnemy
         isShooting = true;
         for (int i = 0; i < burstCount; i++)
         {
-            Vector2 targetDirection = PlayerController.Instance.transform.position - transform.position;
+            Vector2 targetDirection = playerController.transform.position - transform.position;
             GameObject newBullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
             newBullet.transform.right = targetDirection;
             if (newBullet.TryGetComponent(out Projectiles projectiles))

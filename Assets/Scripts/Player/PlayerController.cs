@@ -14,8 +14,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource dashSound;
 
     private bool facingLeft = false;
+    private float startMovingSpeed;
     public bool FacingLeft { get { return facingLeft; } set { facingLeft = value; } }
-    public static PlayerController Instance;
+    //public static PlayerController Instance;
 
     private PlayerControls playerControls;
     private Vector2 movement;
@@ -29,7 +30,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
         playerControls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     public void Start()
     {
         playerControls.Combat.Dash.started += _ => Dash();
+        startMovingSpeed = moveSpeed;
     }
 
     private void OnEnable()
@@ -100,20 +101,24 @@ public class PlayerController : MonoBehaviour
 
     private void Dash()
     {
-        if (!isDashing) StartCoroutine(IEDash());
+        if (!isDashing)
+        {
+            isDashing = true;
+            moveSpeed *= dashSpeed;
+            trailRenderer.emitting = true;
+            StartCoroutine(EndDashRoutine());
+        }
+
     }
 
-    private IEnumerator IEDash()
+    private IEnumerator EndDashRoutine()
     {
-        dashSound.Play();
-        isDashing = true;
-        moveSpeed *= dashSpeed;
-        trailRenderer.emitting = true;
         float dashTime = .2f;
+        float dashCD = .25f;
         yield return new WaitForSeconds(dashTime);
-        moveSpeed /= dashSpeed;
+        moveSpeed = startMovingSpeed;
         trailRenderer.emitting = false;
-        yield return new WaitForSeconds(dashCoolDown);
+        yield return new WaitForSeconds(dashCD);
         isDashing = false;
     }
 }
