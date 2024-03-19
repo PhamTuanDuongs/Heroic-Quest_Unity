@@ -38,7 +38,7 @@ public class PlayerLevel : MonoBehaviour
 
     private void OnLevelUp()
     {
-        Debug.Log("Current level: " + currentLevel);
+
     }
 
     private float UpdateMaxExp()

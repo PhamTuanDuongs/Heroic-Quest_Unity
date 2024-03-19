@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 [System.Serializable]
@@ -18,6 +19,7 @@ public class EnemyGenerate : MonoBehaviour
     [SerializeField] private GameObject[] enemyTypes;
     [SerializeField] private int initCount = 2;
     [SerializeField] private int incrementalNum = 1;
+    [SerializeField] private LayerMask boundary;
 
     private int currentWave = 0;
     private bool canSpawn = true;
@@ -44,7 +46,6 @@ public class EnemyGenerate : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
         }
-        Debug.Log("c: " + currentWave);
         //if (currentWave >= wavesToSpawn.Length)
         //{
         //    StopAllCoroutines();
@@ -54,7 +55,6 @@ public class EnemyGenerate : MonoBehaviour
         //spawn enemy
 
         int numberEnemies = initCount + (currentWave * incrementalNum);
-        Debug.Log("total Enemies: " + (currentWave * incrementalNum));
         for (int i = 0; i < enemyTypes.Length; i++)
         {
             StartCoroutine(SpawnRandomObject(enemyTypes[i], numberEnemies));
@@ -76,13 +76,11 @@ public class EnemyGenerate : MonoBehaviour
         int count = 0;
         while (count < total)
         {
-
             count++;
-            float randomDistance = Random.Range(0f, spawnArea.magnitude);
-            float randomAngle = Random.Range(0f, 360f);
-            Vector2 spawnPosition = (Vector2)transform.position + new Vector2(Mathf.Cos(randomAngle) * randomDistance, Mathf.Sin(randomAngle) * randomDistance);
 
-            GameObject enemy = Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
+
+
+            GameObject enemy = Instantiate(objectToSpawn, GetRandomPosition(), Quaternion.identity);
             enemy.GetComponent<EnemyHealth>().OnEnemyDead += playerLevel.OnGetExp;
 
             yield return new WaitForSeconds(.5f);
@@ -90,9 +88,24 @@ public class EnemyGenerate : MonoBehaviour
 
     }
 
+    private Vector2 GetRandomPosition()
+    {
+
+        Vector2 spawnPosition = transform.position;
+
+        float randomDistance = Random.Range(0f, spawnArea.magnitude);
+        float randomAngle = Random.Range(0f, 360f);
+        spawnPosition = (Vector2)transform.position + new Vector2(Mathf.Cos(randomAngle) * randomDistance, Mathf.Sin(randomAngle) * randomDistance);
+        if (Physics2D.OverlapCircle(spawnPosition, 0.5f, boundary))
+            spawnPosition = transform.position;
+
+        return spawnPosition;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, spawnArea.magnitude);
+        Gizmos.DrawSphere(transform.position, 0.5f);
     }
 }

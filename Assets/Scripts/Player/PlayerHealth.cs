@@ -1,3 +1,4 @@
+using HeroicQuest;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,12 +11,18 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float knockBackThrustAmount = 10f;
     [SerializeField] private float damageRecoveryTime = 1f;
     [SerializeField] private AudioSource takeDamageSound;
+    [SerializeField] private GameObject activeWeapon;
+    [SerializeField] private AudioSource deathSound;
+    [SerializeField] private GameplayUI gameplayUI;
 
     private bool canTakeDamage = true;
+    private bool isDeath = false;
     private int currentHealth;
     private KnockBack knockBack;
     private Flash flash;
     private Rigidbody2D rb;
+    private Animator animator;
+
 
     //Display hp
     private HealthUI healthUI;
@@ -26,6 +33,7 @@ public class PlayerHealth : MonoBehaviour
         flash = GetComponent<Flash>();
         rb = GetComponent<Rigidbody2D>();
         healthUI = GetComponent<HealthUI>();
+        animator = GetComponent<Animator>();
     }
     void Start()
     {
@@ -72,10 +80,14 @@ public class PlayerHealth : MonoBehaviour
 
     public void DetectDeath()
     {
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDeath)
         {
-            SceneManager.LoadScene(1);
-
+            deathSound.Play();
+            animator.SetTrigger("isDeath");
+            isDeath = true;
+            activeWeapon.SetActive(false);
+            rb.bodyType = RigidbodyType2D.Static;
+            gameplayUI.GameOverMenu();
         }
     }
 }

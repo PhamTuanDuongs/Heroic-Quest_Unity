@@ -496,6 +496,7 @@ GameObject:
   - component: {fileID: 5658159288011413757}
   - component: {fileID: 7206386674275040669}
   - component: {fileID: 2019538947223143873}
+  - component: {fileID: 4905395982118031405}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Enemy
@@ -737,3 +738,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 4733631235136421054}
+--- !u!114 &4905395982118031405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264111190526794307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebc80e562a031da4191d828476ee363d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goinCoinPrefab: {fileID: 7129304944177544000, guid: acc8dc7158ee1614dbd84adba6019f4a, type: 3}

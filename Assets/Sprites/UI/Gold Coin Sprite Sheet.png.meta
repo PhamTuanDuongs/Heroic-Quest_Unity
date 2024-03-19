@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c3f601a4ab05a8044b105001b16c57a1
+guid: 7512763b6f219e24c9a88bbf5b01ddc3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spr_player_right_hit_0
+      name: Gold Coin Sprite Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,83 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24ba9ddfb8421f5498733980ccba4540
-      internalID: 1373358152
+      spriteID: 87232717a142cd04f973e6fd54f618b8
+      internalID: 1635187972
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_player_right_hit_1
+      name: Gold Coin Sprite Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c4b3b9a560b59f48aab84c70e9a3269
+      internalID: 189662954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gold Coin Sprite Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88ef09b0549ef96488166911ce58940a
+      internalID: -406464863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gold Coin Sprite Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df5de57b49c16d34eadb02bf92426ca9
+      internalID: 1514680626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gold Coin Sprite Sheet_4
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 64
-        height: 64
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6add284a849c7314d950a87d91142f01
-      internalID: 5928782
+      spriteID: 413f6b91c584fea4a91ed6bc39f871e4
+      internalID: 1511583465
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_player_right_hit_2
+      name: Gold Coin Sprite Sheet_5
       rect:
         serializedVersion: 2
-        x: 128
+        x: 80
         y: 0
-        width: 64
-        height: 64
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0668b7f502e7e954aa04071576c43a0f
-      internalID: 936163589
+      spriteID: 0ebb8f85b243c9a4789a7c6e0edd7e87
+      internalID: -1626529592
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_player_right_hit_3
+      name: Gold Coin Sprite Sheet_6
       rect:
         serializedVersion: 2
-        x: 192
+        x: 96
         y: 0
-        width: 64
-        height: 64
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +250,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a7eb7b77fdfd0d4cb62a0fce903d531
-      internalID: 1992338465
+      spriteID: 0b93939a5027aa143ab932dee38c932e
+      internalID: 1819058196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gold Coin Sprite Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83d1d4b54523c4741994cc11259a6ff9
+      internalID: 323531003
       vertices: []
       indices: 
       edges: []
@@ -204,10 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spr_player_right_hit_0: 1373358152
-      spr_player_right_hit_1: 5928782
-      spr_player_right_hit_2: 936163589
-      spr_player_right_hit_3: 1992338465
+      Gold Coin Sprite Sheet_0: 1635187972
+      Gold Coin Sprite Sheet_1: 189662954
+      Gold Coin Sprite Sheet_2: -406464863
+      Gold Coin Sprite Sheet_3: 1514680626
+      Gold Coin Sprite Sheet_4: 1511583465
+      Gold Coin Sprite Sheet_5: -1626529592
+      Gold Coin Sprite Sheet_6: 1819058196
+      Gold Coin Sprite Sheet_7: 323531003
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

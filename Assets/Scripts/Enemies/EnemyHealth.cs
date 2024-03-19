@@ -10,8 +10,10 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] private int health = 3;
     [SerializeField] private int currentHealth;
+
     private KnockBack knockBack;
     private Flash flash;
+    private PickupSpawner pickupSpawner;
 
     //Display hp
     private HealthUI healthUI;
@@ -20,7 +22,8 @@ public class EnemyHealth : MonoBehaviour
     {
         knockBack = GetComponent<KnockBack>();
         flash = GetComponent<Flash>();
-        healthUI = GetComponent<HealthUI>();    
+        healthUI = GetComponent<HealthUI>();
+        pickupSpawner = GetComponent<PickupSpawner>();
     }
     void Start()
     {
@@ -54,6 +57,7 @@ public class EnemyHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             OnEnemyDead.Invoke(this, expDrop);
+            pickupSpawner.DropItems();
             Destroy(gameObject);
         }
     }
