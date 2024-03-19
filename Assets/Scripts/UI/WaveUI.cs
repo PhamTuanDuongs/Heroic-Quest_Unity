@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class WaveUI : MonoBehaviour
 {
+    public static WaveUI Instance;
     [SerializeField]
     GameObject WaveStart;
     [SerializeField]
@@ -13,6 +14,15 @@ public class WaveUI : MonoBehaviour
     [SerializeField]
     GameObject Go;
 
+    public int countWaveComplete = 0;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
     public IEnumerator StartWave()
     {
         WaveStart.SetActive(true);
@@ -24,6 +34,7 @@ public class WaveUI : MonoBehaviour
     public IEnumerator WaveComplete()
     {
         WaveCompleted.SetActive(true);
+        countWaveComplete++;    
         yield return new WaitForSeconds(1f);
         WaveCompleted.SetActive(false);
 

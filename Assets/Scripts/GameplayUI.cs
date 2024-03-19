@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,7 +10,10 @@ namespace HeroicQuest
     {
         [SerializeField] private AudioSource[] audioSources;
         [SerializeField] private GameObject GameoverObj;
+        [SerializeField] private GameObject GameoverPauseObj;
         [SerializeField] private TextMeshProUGUI coinText;
+        [SerializeField] private TextMeshProUGUI yourCoin;
+        [SerializeField] private TextMeshProUGUI yourWaveComplete;
 
 
         private void Awake()
@@ -41,6 +44,20 @@ namespace HeroicQuest
         {
             GameplayManager.Instance.coin++;
             coinText.text = GameplayManager.Instance.coin.ToString("D3");
+            yourCoin.text = GameplayManager.Instance.coin.ToString();
+            yourWaveComplete.text = "Complete wave: " +  WaveUI.Instance.countWaveComplete.ToString();
+        }
+
+        public void Pause()
+        {
+            Time.timeScale = 0;
+            GameoverPauseObj.SetActive(true);
+        }
+
+        public void UnPause()
+        {
+            Time.timeScale = 1;
+            GameoverPauseObj.SetActive(false);
         }
     }
 }

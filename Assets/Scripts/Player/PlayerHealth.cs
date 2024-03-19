@@ -90,4 +90,6 @@ public class PlayerHealth : MonoBehaviour
             gameplayUI.GameOverMenu();
         }
     }
+
+    public bool CheckDeath() => isDeath;
 }

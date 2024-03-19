@@ -5,13 +5,12 @@ using UnityEngine;
 
 public class PlayerLevel : MonoBehaviour
 {
-    [SerializeField] private int currentLevel;
+    [SerializeField] public int currentLevel;
     [SerializeField] private float currentExp;
     [SerializeField] private float currentMaxExp;
     [SerializeField] private float baseExp;
 
     private ExpUI expUI;
-
     private void Start()
     {
         expUI = GetComponent<ExpUI>();

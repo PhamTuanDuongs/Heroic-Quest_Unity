@@ -14,6 +14,7 @@ public class Sword : MonoBehaviour
     private Animator animator;
     private PlayerController playerController;
     private ActiveWeapon activeWeapon;
+    private PlayerHealth playerHealth;
     private bool canAttack = true;
 
     //slash anim instantinate when attack
@@ -24,6 +25,7 @@ public class Sword : MonoBehaviour
         playControls = new PlayerControls();
         activeWeapon = GetComponentInParent<ActiveWeapon>();
         playerController = GetComponentInParent<PlayerController>();
+        playerHealth = GetComponentInParent<PlayerHealth>();
     }
     private void OnEnable()
     {
@@ -57,7 +59,7 @@ public class Sword : MonoBehaviour
         //    }
         //}
 
-        if (canAttack)
+        if (canAttack && !playerHealth.CheckDeath())
         {
             slashSound.Play();
             canAttack = false;

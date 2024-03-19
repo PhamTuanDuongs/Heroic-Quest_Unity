@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     public void Start()
     {
-        playerControls.Combat.Dash.performed += _ => Dash();
+        playerControls.Combat.Dash.started += _ => Dash();
     }
 
     private void OnEnable()
