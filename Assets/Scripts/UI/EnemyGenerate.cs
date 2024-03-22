@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 [System.Serializable]
@@ -53,7 +52,15 @@ public class EnemyGenerate : MonoBehaviour
         int numberEnemies = initCount + (currentWave * incrementalNum);
         for (int i = 0; i < enemyTypes.Length; i++)
         {
-            StartCoroutine(SpawnRandomObject(enemyTypes[i], numberEnemies));
+            if (i <= 1)
+            {
+                StartCoroutine(SpawnRandomObject(enemyTypes[i], numberEnemies));
+            }
+            else
+            {
+                StartCoroutine(SpawnRandomHealthPotion(enemyTypes[i], numberEnemies));
+
+            }
 
         }
 
@@ -89,7 +96,7 @@ public class EnemyGenerate : MonoBehaviour
         float randomAngle = Random.Range(0f, 360f);
         spawnPosition = (Vector2)transform.position + new Vector2(Mathf.Cos(randomAngle) * randomDistance, Mathf.Sin(randomAngle) * randomDistance);
 
-        Collider2D col = Physics2D.OverlapCircle(spawnPosition, 3f, LayerMask.GetMask("Foreground"));
+        Collider2D col = Physics2D.OverlapCircle(spawnPosition, 1f, LayerMask.GetMask("Foreground"));
         if (col != null)
         {
             if (col.bounds.Contains(spawnPosition))
@@ -106,5 +113,21 @@ public class EnemyGenerate : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, spawnArea.magnitude);
+    }
+    IEnumerator SpawnRandomHealthPotion(GameObject objectToSpawn, int total)
+    {
+        int count = 0;
+        while (count < total)
+        {
+            count++;
+
+
+
+            GameObject healthPotion = Instantiate(objectToSpawn, GetRandomPosition(), Quaternion.identity);
+           
+
+            yield return new WaitForSeconds(.5f);
+        }
+
     }
 }

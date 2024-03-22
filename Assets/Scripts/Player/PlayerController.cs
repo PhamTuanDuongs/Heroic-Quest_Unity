@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
     private void Dash()
     {
-        if (!isDashing)
+        if (!isDashing && trailRenderer != null)
         {
             isDashing = true;
             moveSpeed *= dashSpeed;
